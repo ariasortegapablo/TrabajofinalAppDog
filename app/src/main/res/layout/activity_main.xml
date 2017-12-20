@@ -21,78 +21,78 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-              android:layout_marginTop="40sp"
-
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+              android:layout_marginTop="110sp"
+           android:orientation="horizontal">
 
 
             <ImageButton
                 android:id="@+id/imageButtonPerfil"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
+                android:layout_width="100sp"
+                android:layout_height="110sp"
                 android:layout_marginStart="220sp"
-                app:srcCompat="@drawable/fondoverde" />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/perfil" />
 
-            <ImageButton
-                android:id="@+id/imageButtonEditarPerfil"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/fondoverde" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30sp"
             android:padding="5sp"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/imageButtonPerdido"
-                android:layout_width="300sp"
-                android:layout_height="124sp"
+            <Button
+                android:id="@+id/ButtonPerdido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/fondoverde" />
 
-            <ImageButton
-                android:id="@+id/imageButtonEncontrado"
-                android:layout_width="300sp"
-                android:layout_height="124sp"
+                android:background="?android:attr/colorActivatedHighlight"
+                android:text="¿Perdiste un /n perro?" />
+
+            <Button
+                android:id="@+id/ButtonEncontrado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/fondoverde" />
+                android:background="@color/colorPrimary"
+                android:text="¿Encontraste un perro?" />
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/imageButtonChat"
-            android:layout_width="match_parent"
-            android:layout_height="103sp"
+        <Button
+            android:id="@+id/ButtonChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50sp"
+            android:background="@android:color/holo_blue_bright"
             android:padding="10sp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/fondoverde" />
+            android:text="Chat" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="175sp"
+            android:layout_marginTop="55sp"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/imageButtonPerdidos"
-                android:layout_width="300sp"
-                android:layout_height="124sp"
+            <Button
+                android:id="@+id/ButtonPerdidos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/fondoverde" />
+                android:background="?android:attr/textColorLinkInverse"
+                android:text="Perdidos" />
 
-            <ImageButton
-                android:id="@+id/imageButtonEncontrados"
-                android:layout_width="300sp"
-                android:layout_height="124sp"
+            <Button
+                android:id="@+id/ButtonEncontrados"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/fondoverde" />
+                android:background="@android:color/holo_purple"
+                android:text="Encontrados" />
         </LinearLayout>
 
     </LinearLayout>

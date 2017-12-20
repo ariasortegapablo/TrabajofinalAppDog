@@ -1,21 +1,26 @@
 package arias.pablo.empezando.lay;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore db;
 
-       findActivity findclass=new findActivity();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final ImageButton lost = (ImageButton) findViewById(R.id.imageButtonPerdido);
+        final Button lost = (Button) findViewById(R.id.ButtonPerdido);
         lost.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // your handler code here
@@ -24,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        final ImageButton find = (ImageButton) findViewById(R.id.imageButtonEncontrado);
+        final Button find = (Button) findViewById(R.id.ButtonEncontrado);
         find.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // your handler code here
@@ -33,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        final ImageButton chat = (ImageButton) findViewById(R.id.imageButtonChat);
+        final Button chat = (Button) findViewById(R.id.ButtonChat);
         chat.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // your handler code here
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        final ImageButton losts= (ImageButton) findViewById(R.id.imageButtonPerdidos);
+        final Button losts= (Button) findViewById(R.id.ButtonPerdidos);
         losts.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // your handler code here
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        final ImageButton finds = (ImageButton) findViewById(R.id.imageButtonEncontrados);
+        final Button finds = (Button) findViewById(R.id.ButtonEncontrados);
         finds.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // your handler code here
@@ -61,12 +66,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+              /////////////////////////////////Seperacion
+        firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+
+       verifyUser();
     }
 
 
 
-
-
+    public void verifyUser() {
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser == null) {
+            goLogInScreen();
+        }
     }
+
+    private void goLogInScreen() {
+        Intent intent = new Intent(MainActivity.this, LogInActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        MainActivity.this.startActivity(intent);
+    }
+
+
+}
 
 

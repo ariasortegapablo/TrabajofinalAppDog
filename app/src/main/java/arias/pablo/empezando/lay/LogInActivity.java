@@ -1,5 +1,6 @@
 package arias.pablo.empezando.lay;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,13 +15,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class RegisterActivity extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity {
+
+
 
 
     private EditText emailEditText;
     private EditText passwordEditText;
-    private EditText repeatPasswordEditText;
-    private Button registerButton;
+    private Button logInButton;
+    private Button openRegisterButton;
 
     private ProgressBar progressBar;
 
@@ -29,37 +32,42 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        setContentView(R.layout.activity_log_in);
 
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
-        repeatPasswordEditText = (EditText) findViewById(R.id.repeatPasswordEditText);
-        registerButton = (Button) findViewById(R.id.registerButton);
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        logInButton = (Button) findViewById(R.id.logInButton);
+        logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                register();
+                logIn();
             }
         });
-
+        openRegisterButton = (Button) findViewById(R.id.openRegisterButton);
+        openRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRegister();
+            }
+        });
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
-    public void register() {
+    private void logIn() {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
         progressBar.setVisibility(View.VISIBLE);
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
+        firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
-                            goLogIn();
+                            goMainScreen();
                         } else {
                             showErrorMessage(task.getException().toString());
                         }
@@ -68,10 +76,16 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void showErrorMessage(String s) {
-        Toast.makeText(getApplicationContext(), "Hay error: " + s, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Hay error: " + s, Toast.LENGTH_SHORT).show();
     }
 
-    private void goLogIn() {
-        finish();
+    private void goMainScreen() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void openRegister() {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }
